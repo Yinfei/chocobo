@@ -1,6 +1,42 @@
 <div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+    <%= if Enum.empty?(@games) do %>
+        <p>No games registered yet.</p>
+    <% else %>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Release Date</th>
+                <th>Box</th>
+                <th>Manual</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%= for game <- @games do %>
+                <tr>
+                    <td><%= game.title %></td>
+                    <td><%= game.release_date %></td>
+                    <td>
+                        <%= case game.box do %>
+                        <% true -> %>
+                            <p><span class="glyphicon glyphicon-ok"></span></p>
+                        <% _ -> %>
+                            <p><span class="glyphicon glyphicon-remove"></span></p>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= case game.manual do %>
+                            <% true -> %>
+                            <p><span class="glyphicon glyphicon-ok"></span></p>
+                            <% _ -> %>
+                            <p><span class="glyphicon glyphicon-remove"></span></p>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <% end %>
 </div>
 
 <div class="row marketing">
