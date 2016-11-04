@@ -4,7 +4,7 @@ defmodule Chocobo.PageController do
   alias Chocobo.Game
 
   def index(conn, _params) do
-    games = Repo.all(Game)
+    games = Game |> Game.ordered_by_title() |> Repo.all
     render(conn, "index.html", games: games)
   end
 end

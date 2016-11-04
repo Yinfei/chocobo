@@ -19,4 +19,9 @@ defmodule Chocobo.Game do
     |> cast(params, [:title, :release_date, :owned, :box, :manual])
     |> validate_required([:title, :release_date, :owned, :box, :manual])
   end
+
+  def ordered_by_title(query) do
+    query
+    |> order_by([g], asc: g.title)
+  end
 end
