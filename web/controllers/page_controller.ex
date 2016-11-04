@@ -4,7 +4,12 @@ defmodule Chocobo.PageController do
   alias Chocobo.Game
 
   def index(conn, _params) do
-    games = Game |> Game.ordered_by_title() |> Repo.all
+    games =
+      Game
+      |> where(owned: true)
+      |> order_by(:title)
+      |> Repo.all
+
     render(conn, "index.html", games: games)
   end
 end
