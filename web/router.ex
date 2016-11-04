@@ -14,6 +14,12 @@ defmodule Chocobo.Router do
   end
 
   scope "/", Chocobo do
+    pipe_through :browser # Use the default browser stack
+
+    get "/", PageController, :index
+  end
+
+  scope "/api", Chocobo do
     pipe_through :api # Use the default browser stack
 
     resources "/games", GameController
